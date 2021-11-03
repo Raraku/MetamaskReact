@@ -1,14 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { Web3ReactProvider } from "@web3-react/core";
+import Web3 from "web3";
+
+function getLibrary(provider: any) {
+  return new Web3(provider);
+}
+
+function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
+  return (
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <Component {...pageProps} />
+    </Web3ReactProvider>
+  );
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <MyApp Component={App} pageProps={{}} />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
